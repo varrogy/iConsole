@@ -66,7 +66,7 @@
 	}
 	
 	label.text = [NSString stringWithFormat:@"Hello %@", text];
-	[iConsole info:@"Said '%@'", label.text];
+    DInfo(@"Said '%@'", label.text);
 }
 
 - (void)crash:(id)sender
@@ -110,13 +110,13 @@
 {
 	if ([command isEqualToString:@"version"])
 	{
-		[iConsole info:@"%@ version %@",
+        DInfo(@"%@ version %@",
 		 [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleName"],
-		 [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"]];
+		 [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"]);
 	}
 	else 
 	{
-		[iConsole error:@"unrecognised command, try 'version' instead"];
+        DError(@"unrecognised command, try 'version' instead");
 	}
 }
 

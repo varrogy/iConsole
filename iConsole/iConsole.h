@@ -15,7 +15,9 @@
 #define LOG_LEVEL_WARNING 3
 #define LOG_LEVEL_INFO 4
 
-#define CONSOLE_ENABLED 1 //suggest setting this is as a compiler macro instead
+#define VERBOSE 1 // Verbose logging (Pretty function names and Line numbers)
+
+#define CONSOLE_ENABLED 0 //suggest setting this is as a compiler macro instead
 #define LOG_LEVEL LOG_LEVEL_INFO //minimum logging level
 #define ADD_CRASH_HANDLER 1 //add automatic crash logging
 #define USE_GOOGLE_STACK_TRACE 1 //use GTM functions to improve stack trace
@@ -34,9 +36,31 @@
 #define LOG_SUBMIT_EMAIL @"" //default email address to submit logs
 
 #define CONSOLE_BACKGROUND_COLOR [UIColor blackColor]
-#define CONSOLE_TEXT_COLOR [UIColor whiteColor]
+#define CONSOLE_TEXT_COLOR [UIColor greenColor]
 #define CONSOLE_BUTTON_TYPE UIButtonTypeInfoLight
 
+#if CONSOLE_ENABLED > 0
+    #if VERBOSE > 0
+    #	define DLog(fmt, ...) [iConsole log:(@"%s [row %d.] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__];
+    #	define DInfo(fmt, ...) [iConsole info:(@"%s [row %d.] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__];
+    #	define DWarning(fmt, ...) [iConsole warn:(@"%s [row %d.] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__];
+    #	define DError(fmt, ...) [iConsole error:(@"%s [row %d.] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__];
+    #	define DCrash(fmt, ...) [iConsole crash:(@"%s [row %d.] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__];
+    #else
+    #	define DLog(fmt, ...) [iConsole log:(fmt), ##__VA_ARGS__];
+    #	define DInfo(fmt, ...) [iConsole info:(fmt), ##__VA_ARGS__];
+    #	define DWarning(fmt, ...) [iConsole warn:(fmt), ##__VA_ARGS__];
+    #	define DError(fmt, ...) [iConsole error:(fmt), ##__VA_ARGS__];
+    #	define DCrash(fmt, ...) [iConsole crash:(fmt), ##__VA_ARGS__];
+    #endif
+    #define ALog(...) NSLog(__VA_ARGS__)
+#else
+    #define DLog(...) /* */
+    #define DInfo(fmt, ...) /* */
+    #define DWarning(fmt, ...) /* */
+    #define DError(fmt, ...) /* */
+    #define DCrash(fmt, ...) /* */
+#endif
 
 @protocol iConsoleDelegate
 

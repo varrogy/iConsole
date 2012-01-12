@@ -135,7 +135,9 @@ void exceptionHandler(NSException *exception)
 - (CGAffineTransform)viewTransform
 {
 	CGFloat angle = 0;
-	switch ([UIApplication sharedApplication].statusBarOrientation) {
+    
+	UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
+    switch (orientation) {
 		case UIInterfaceOrientationPortraitUpsideDown:
 			angle = M_PI;
 			break;
@@ -145,6 +147,8 @@ void exceptionHandler(NSException *exception)
 		case UIInterfaceOrientationLandscapeRight:
 			angle = M_PI_2;
 			break;
+        default:
+            break;
 	}
 	return CGAffineTransformMakeRotation(angle);
 }
@@ -395,7 +399,7 @@ void exceptionHandler(NSException *exception)
 	
 #else
 	
-	return nil
+	return nil;
 	
 #endif
 	
@@ -528,7 +532,7 @@ void exceptionHandler(NSException *exception)
 + (void)log:(NSString *)format arguments:(va_list)argList
 {	
 	NSString *message = [[[NSString alloc] initWithFormat:format arguments:argList] autorelease];
-	NSLog(@"%@", message);
+    NSLog(@"%@", message);
 	
 #if defined CONSOLE_ENABLED && CONSOLE_ENABLED
 	
