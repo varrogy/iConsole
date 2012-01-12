@@ -11,19 +11,22 @@
 
 @implementation HelloWorldAppDelegate
 
-@synthesize window;
-@synthesize viewController;
+@synthesize window = _window;
+@synthesize viewController = _viewController;
 
-- (void)applicationDidFinishLaunching:(UIApplication *)application
-{        
-	[window addSubview:viewController.view];
-    [window makeKeyAndVisible];
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{   
+    self.window = [[[iConsoleWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
+    self.viewController = [[[HelloWorldViewController alloc] init] autorelease];    
+    self.window.rootViewController = self.viewController;
+    [_window makeKeyAndVisible];
+    return YES;
 }
 
 - (void)dealloc
 {
-    [viewController release];
-    [window release];
+    [_viewController release];
+    [_window release];
     [super dealloc];
 }
 

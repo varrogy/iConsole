@@ -11,17 +11,17 @@
 
 
 @interface HelloWorldViewController : UIViewController <UITextFieldDelegate, iConsoleDelegate>
-{	
-	UILabel *label;
-	UITextField *field;
-}
 
-@property (nonatomic, retain) IBOutlet UILabel *label;
-@property (nonatomic, retain) IBOutlet UITextField *field;
-@property (nonatomic, retain) IBOutlet UILabel *swipeLabel;
 
-- (IBAction)sayHello:(id)sender;
-- (IBAction)crash:(id)sender;
+@property (nonatomic, retain) UILabel *label;
+@property (nonatomic, retain) UITextField *field;
+@property (nonatomic, retain) UILabel *swipeLabel;
+@property (nonatomic, retain) UIButton *btnCrash;
+@property (nonatomic, retain) UIButton *btnSayHello;
+
+
+-(void)sayHello:(id)sender;
+-(void)crash:(id)sender;
+
 
 @end
-

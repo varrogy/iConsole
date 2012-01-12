@@ -7,17 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "iConsoleWindow.h"
 
 @class HelloWorldViewController;
 
 @interface HelloWorldAppDelegate : NSObject <UIApplicationDelegate>
-{
-    UIWindow *window;
-    HelloWorldViewController *viewController;
-}
 
-@property (nonatomic, retain) IBOutlet UIWindow *window;
-@property (nonatomic, retain) IBOutlet HelloWorldViewController *viewController;
+@property (nonatomic, retain) iConsoleWindow *window;
+@property (nonatomic, retain) HelloWorldViewController *viewController;
 
 @end
-
